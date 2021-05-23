@@ -1,4 +1,4 @@
-package org.clb.structure.mergesort;
+package org.clb.structure.sort.mergesort;
 
 /**
  * @Description πÈ≤¢≈≈–Ú

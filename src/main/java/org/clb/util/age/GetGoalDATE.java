@@ -21,10 +21,10 @@ public class GetGoalDATE {
         List<String> list = split(date, "-");
         cal.set(Integer.parseInt(list.get(0)),Integer.parseInt(list.get(1))-1,Integer.parseInt(list.get(2)));
         Date time = cal.getTime();
-        System.out.println("当前指定日期是："+new SimpleDateFormat("yyyy-MM-dd").format(time));
+        //System.out.println("当前指定日期是："+new SimpleDateFormat("yyyy-MM-dd").format(time));
         cal.add(Calendar.DAY_OF_MONTH,a);
         cal.getTime();
-        System.out.println("前两天的日期是 "+new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
+        //System.out.println("前两天的日期是 "+new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()));
         return new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
     }
 
@@ -37,8 +37,16 @@ public class GetGoalDATE {
         Calendar cal=Calendar.getInstance();
         int b = cal.getActualMaximum(a);
         int c = cal.get(a);
-        return b==c;
+        //return true;
+        return a==7?cal.get(a)==1:b==c;
     }
+
+    /**
+     *
+     * @param date
+     * @param a 往前几个月
+     * @return
+     */
     public static String getGoalMontLastDay(String date,int a){
         Calendar cal=Calendar.getInstance();
         List<String> list = SplitterUtil.get(date, "-");
@@ -47,6 +55,7 @@ public class GetGoalDATE {
             int day=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
             cal.add(Calendar.DAY_OF_MONTH,-day);
         }
+        //System.out.println(cal.getTime());
         return new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
     }
     public static void main(String[] args) {

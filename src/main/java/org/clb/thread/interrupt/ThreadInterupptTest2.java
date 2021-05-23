@@ -1,4 +1,4 @@
-package org.clb.thread;
+package org.clb.thread.interrupt;
 
 public class ThreadInterupptTest2 {
     public static void main(String[] args) {

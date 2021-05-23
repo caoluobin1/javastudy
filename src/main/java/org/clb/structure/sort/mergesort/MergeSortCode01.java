@@ -1,4 +1,4 @@
-package org.clb.structure.mergesort;
+package org.clb.structure.sort.mergesort;
 
 /** 求小和
  * 例如 2 3 3 6 5  和为 2*4 +3*2+3*2

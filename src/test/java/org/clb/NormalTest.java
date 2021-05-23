@@ -1,6 +1,10 @@
 package org.clb;
 
+import org.checkerframework.checker.units.qual.C;
+import org.clb.pojo.PortalErr;
+import org.clb.pojo.User;
 import org.clb.pojo.list.Node;
+import org.clb.util.age.GetGoalDATE;
 import org.clb.util.stringsplitter.SplitterUtil;
 import org.junit.Test;
 
@@ -8,6 +12,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Description
@@ -100,18 +105,62 @@ public class NormalTest {
     }
     @Test
     public void test7(){
-        for (int i = 0; i < 5; i++) {
-            try {
-             if (i==2){
-                 int a=5/0;
-             }
-            }catch (Exception e){
-                throw e;
-            }
-            System.out.println(i);
-        }
-
+        GetGoalDATE.nowIsLastDay(Calendar.DAY_OF_WEEK);
+        Calendar cal = Calendar.getInstance();
+        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+        cal.set(2021,4,16);
+        int i = cal.get(Calendar.DAY_OF_WEEK);
+        System.out.println(i);
+    }
+    @Test
+    public void test8(){
+        String goalMontLastDay = GetGoalDATE.getGoalMontLastDay("2020-05-31", 3);
+        System.out.println(goalMontLastDay);
+        List<PortalErr> list=new ArrayList<>();
+        list.add(new PortalErr(10.1,"1"));
+        list.add(new PortalErr(10.1,"2"));
+        List<String> collect = list.stream().map(a -> a.getPk_portal_err()).collect(Collectors.toList());
+        HashMap map=new HashMap();
+        map.put("a",collect);
+        System.out.println("sad");
     }
 
+    @Test
+    public void test9(){
+        Calendar cal= Calendar.getInstance();
+        int day_of_week = cal.get(Calendar.DAY_OF_WEEK);
+        int day_of_month = cal.get(Calendar.DAY_OF_MONTH);
+        System.out.println(day_of_month);
+        String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
+        String da=day_of_month==cal.getActualMaximum(Calendar.DAY_OF_MONTH)?date:GetGoalDATE.getGoaldate(date,-day_of_month);
+        String goalMontLastDay = GetGoalDATE.getGoalMontLastDay(da, 1);
+        System.out.println(goalMontLastDay);
+    }
+    @Test
+    public void test10(){
+        Calendar cal= Calendar.getInstance();
+        int day_of_week = cal.get(Calendar.DAY_OF_WEEK);
+        System.out.println(day_of_week);
+        String date=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String weekDate=day_of_week==7?date:GetGoalDATE.getGoaldate(date,-day_of_week+1);
+        String goaldate = GetGoalDATE.getGoaldate(weekDate, -7);
+        System.out.println(weekDate);
+        System.out.println(goaldate);
+    }
+    @Test
+    public void test11(){
+        List<Double> list=new ArrayList();
+        list.add(5.2);
+        list.add(3.2);
+        list.add(10.2);
+        list.add(12.2);
+        list.add(11.2);
+        List item_value =
+            list.stream()
+                .sorted()
+                .collect(Collectors.toList());
+        System.out.println(item_value.get(1));
+
+    }
 }

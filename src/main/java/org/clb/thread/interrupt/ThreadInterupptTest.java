@@ -1,4 +1,4 @@
-package org.clb.thread;
+package org.clb.thread.interrupt;
 
 public class ThreadInterupptTest {
     public static void main(String[] args) throws InterruptedException {
@@ -20,8 +20,8 @@ public class ThreadInterupptTest {
         thread.interrupt();//中断线程使标记位为true
         //Thread.currentThread().sleep(1000*3);
         //System.out.println(Thread.currentThread().getName());
-        //thread.interrupted();//清除标记位 使标记位为false
-        //thread.isInterrupted();//查看标记位
+        thread.interrupted();//清除标记位 使标记位为false
+        thread.isInterrupted();//查看标记位
         //System.out.println(thread.interrupted());
 
         System.out.println(thread.isInterrupted());

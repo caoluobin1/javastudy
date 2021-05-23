@@ -46,46 +46,6 @@ public class Test {
         });
         threadPoolExecutor.shutdown();
     }
-//    new Thread(()->{
-//
-//    }).start();
-//        new Thread(()->{
-//        for (int i = listField.size()/3+1; i < listField.size()*2/3+1; i++) {
-//            String returnValue="";
-//            for (int j = 1; j < 4 ; j++) {
-//                FieldList field = jdbcTemplate.queryField(QUERY_SQL, new Object[]{
-//                        listField.get(i).get("node_pid"), listField.get(i).get("fk_yl_yljg"), j
-//                });
-//
-//                returnValue = returnValue + field.get("name");
-//                if (j < 3) {
-//                    returnValue = returnValue + "-";
-//                }
-//            }
-//            jdbcTemplate.executeUpdate(UPDATE_SQL,new Object[]{
-//                    returnValue,  listField.get(i).get("pk_yl_yljg_bed")
-//            });
-//
-//        }
-//    }).start();
-//        new Thread(()->{
-//        for (int i = listField.size()*2/3+1; i < listField.size(); i++) {
-//            String returnValue="";
-//            for (int j = 1; j < 4 ; j++) {
-//                FieldList field = jdbcTemplate.queryField(QUERY_SQL, new Object[]{
-//                        listField.get(i).get("node_pid"), listField.get(i).get("fk_yl_yljg"), j
-//                });
-//
-//                returnValue = returnValue + field.get("name");
-//                if (j < 3) {
-//                    returnValue = returnValue + "-";
-//                }
-//            }
-//            jdbcTemplate.executeUpdate(UPDATE_SQL,new Object[]{
-//                    returnValue,  listField.get(i).get("pk_yl_yljg_bed")
-//            });
-//
-//        }
-//    }).start();
+
 
 }

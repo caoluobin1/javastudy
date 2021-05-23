@@ -10,6 +10,14 @@ public class PortalErr {
     private double offset_com_value;
     private String pk_portal_err;
 
+    public PortalErr() {
+    }
+
+    public PortalErr(double offset_com_value, String pk_portal_err) {
+        this.offset_com_value = offset_com_value;
+        this.pk_portal_err = pk_portal_err;
+    }
+
     public double getOffset_com_value() {
         return offset_com_value;
     }
