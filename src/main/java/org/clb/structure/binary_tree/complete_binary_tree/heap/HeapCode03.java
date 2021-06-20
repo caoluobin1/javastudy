@@ -56,6 +56,7 @@ public class HeapCode03 {
             while (heap.peek()<=lines[index].start){
                 heap.poll();//弹出小值
             }
+            //将当前值放入
             heap.add(lines[index].end);
             max=Math.max(max,heap.size());
         }

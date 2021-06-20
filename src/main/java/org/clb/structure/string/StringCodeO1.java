@@ -9,45 +9,49 @@ import java.util.HashMap;
  * @Author clb
  */
 public class StringCodeO1 {
-  public static int count(String s){
-    int start=0;
-    int max=0;
-    HashMap<Character, Integer> map = new HashMap<>();
-    char[] chars = s.toCharArray();
-    for (int i = 0; i < chars.length; i++) {
-      if (!map.containsKey(chars[i])){
-        map.put(chars[i],i);
-        max=Math.max(max,i-start+1);
-      }else {
-        start=Math.max(start,map.get(chars[i])+1);
-        max=Math.max(max,i-start+1);
-        map.put(chars[i],i);
-      }
-    }
-//    max=Math.max(max,count);
-    return max;
-  }
-  public int lengthOfLongestSubstring(String s) {
-    // 记录字符上一次出现的位置
-    int[] last = new int[128];
-    for(int i = 0; i < 128; i++) {
-      last[i] = -1;
-    }
-    int n = s.length();
-
-    int res = 0;
-    int start = 0; // 窗口开始位置
-    for(int i = 0; i < n; i++) {
-      int index = s.charAt(i);//以ASCII值存储
-      start = Math.max(start, last[index] + 1);
-      res   = Math.max(res, i - start + 1);
-      last[index] = i;
+    public static int count(String s) {
+        int start = 0;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (!map.containsKey(chars[i])) {
+                map.put(chars[i], i);
+                max = Math.max(max, i - start + 1);
+            } else {
+                start = Math.max(start, map.get(chars[i]) + 1);
+                max = Math.max(max, i - start + 1);
+                map.put(chars[i], i);
+            }
+        }
+        //    max=Math.max(max,count);
+        return max;
     }
 
-    return res;
-  }
+    public static void main(String[] args) {
+        System.out.println(lengthOfLongestSubstring("abbcdefbcs"));
+    }
 
-  public static void main(String[] args) {
-    System.out.println(count("abbac"));
-  }
+    /*
+    abbcdefbcs
+     */
+    public static int lengthOfLongestSubstring(String s) {
+        // 记录字符上一次出现的位置
+        int[] last = new int[128];
+        for (int i = 0; i < 128; i++) {
+            last[i] = -1;
+        }
+        int n = s.length();
+
+        int res = 0; //记录最大值
+        int start = 0; // 窗口开始位置
+        for (int i = 0; i < n; i++) {
+            int index = s.charAt(i);//以ASCII值存储
+            start = Math.max(start, last[index] + 1);
+            res = Math.max(res, i - start + 1);
+            last[index] = i;
+        }
+
+        return res;
+    }
 }
