@@ -8,31 +8,31 @@ import org.clb.pojo.list.Node;
 public class ReverseList {
     public static Node reverseMyListByIterate(Node head){
         Node next,pre=null;
-        while (head.next!=null){
-            next=head.next;
-            head.next=pre;
+        while (head.getNext()!=null){
+            next=head.getNext();
+            head.setNext(pre);
             pre=head;
             head=next;
         }
         return pre;
     }
     public static Node create(){
-        Node now=new Node();
+        Node now=new Node("1");
         Node first=now;
-        first.name=0+"";
+        first.setName(0+"");
         for (int i = 1; i < 9; i++) {
-            Node next=new Node();
-            now.next=next;
-            now.next.name=i+"";
+            Node next=new Node(i+"");
+            now.setNext(next);
+            now.setName(i+"");
             now=next;
         }
         return first;
     }
     public static void iterate(Node node){
         while (true){
-            System.out.println(node.name);
-            if (node.next==null)break;
-            node=node.next;
+            System.out.println(node.getName());
+            if (node.getNext()==null)break;
+            node=node.getNext();
         }
     }
     public static void main(String[] args) {

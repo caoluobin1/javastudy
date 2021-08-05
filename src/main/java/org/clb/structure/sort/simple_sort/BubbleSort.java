@@ -1,4 +1,4 @@
-package org.clb.structure.sort.bubble_sort;
+package org.clb.structure.sort.simple_sort;
 
 /**
  * @Description ц╟ещеепР

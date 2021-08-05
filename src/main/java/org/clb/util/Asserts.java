@@ -12,4 +12,7 @@ public class Asserts {
         boolean a=obj == null ? true : false;
         if (a) throw new Exception(msg);
     }
+    public static boolean objectNotNull2(Object obj) throws Exception {
+        return obj == null ? false : true;
+    }
 }

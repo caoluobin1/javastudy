@@ -1,6 +1,6 @@
 package org.clb.util.stringsplitter;
 
-//import com.google.common.base.Splitter;
+import com.google.common.base.Splitter;
 
 import java.util.Arrays;
 import java.util.List;
