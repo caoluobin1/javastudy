@@ -1,4 +1,4 @@
-package org.clb.util.age;
+package org.clb.util.date;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

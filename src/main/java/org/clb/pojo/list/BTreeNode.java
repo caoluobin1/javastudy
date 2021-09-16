@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class BTreeNode {
     @NonNull
     public String value;
-    public Node left;
-    public Node right;
+    public BTreeNode left;
+    public BTreeNode right;
 
 }

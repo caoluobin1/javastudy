@@ -1,15 +1,12 @@
 package org.clb;
 
-import org.clb.pojo.Receive;
-import org.clb.pojo.User;
-import org.clb.util.age.DateCompare;
 
-import java.math.BigDecimal;
+
+import org.apache.lucene.util.fst.Builder;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 /**
  * @Description
@@ -20,12 +17,23 @@ import java.util.stream.Collectors;
 public class Test222 {
 
     public static void main(String[] args) throws ParseException {
-        //yyyy-MM-dd HH:mm:ss
-//        List<String> list = Collections.singletonList("[{\n" + "    \"accountId\":\"" + "123" + "\",\n" + "}]");
-//        List<String> list1=new ArrayList<>();
-//        list.add("123");
-//        StringBuffer msg=new StringBuffer();
-//        System.out.println(msg.length()==0);
+
+        System.out.println("MA288YL7533068319D4002".length());
+        System.out.println("?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?".split(",").length);
+        //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = format.parse("2021-08-09");
+//        Date date2 = format.parse("2021-08-02");
+//        System.out.println(date.compareTo(date2));
+//        List list=new LinkedList();
+//        list.add("1");
+//        list.add("2");
+//        list.add("3");
+//        list.add("4");
+//        list.add(4,"5");
+//        for (Object o : list) {
+//            System.out.println(o);
+//        }
+        System.out.println("33072419971212");
     }
     //        String year = datetime.substring(0,4);
     //        String month = datetime.substring(0,7);

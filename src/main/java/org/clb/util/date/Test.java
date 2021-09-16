@@ -1,6 +1,4 @@
-package org.clb.util.age;
-
-import org.clb.pojo.Receive;
+package org.clb.util.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

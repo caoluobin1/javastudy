@@ -1,4 +1,4 @@
-package org.clb.util.age;
+package org.clb.util.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
