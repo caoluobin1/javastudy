@@ -1,0 +1,8 @@
+
+N	java:S106"9Replace this use of System.out or System.err by a logger.(Ы╙ир
+t
+java:S2142"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(фа╣А
+Z
+java:S2147"DCombine this catch with the one at line 29, which has the same body.(фа╣А
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ЪЧ░Н°    
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ЪЧ░Н°    
