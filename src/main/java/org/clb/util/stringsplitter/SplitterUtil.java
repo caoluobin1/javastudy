@@ -7,9 +7,8 @@ import java.util.List;
 
 public class SplitterUtil {
     public static List<String> get2(String a, String sp) {
-        //        List<String> split = Splitter.on(sp).trimResults().splitToList(a);
-        //        return split;
-        return null;
+        List<String> split = Splitter.on(sp).trimResults().splitToList(a);
+        return split;
     }
 
     public static List<String> get(String a, String sp) {
