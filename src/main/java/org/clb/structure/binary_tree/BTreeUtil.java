@@ -2,6 +2,10 @@ package org.clb.structure.binary_tree;
 
 import org.clb.pojo.list.BTreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
+
 /**
  * @Description
  * @Classname BTreeUtil
@@ -33,6 +37,33 @@ public class BTreeUtil {
         a.setLeft(b);a.setRight(c);
         b.setLeft(d);
         c.setLeft(f);c.setRight(g);
+        return a;
+    }
+
+    public static BTreeNode generateBTree() {
+        BTreeNode a = new BTreeNode("1");
+        int count = (int) Math.random() * 2 + 1;
+        Queue<BTreeNode> queue = new LinkedList<>();
+        queue.add(a);
+        for (int i = 0; i < count; i++) {
+            int size = queue.size();
+            for (int j = 0; j < size; j++) {
+                BTreeNode now = queue.poll();
+                for (int k = 0; k < 2; k++) {
+                    int flag = (int) Math.random() * 2 + 1;
+                    if (k == 0 && flag == 1) {
+                        BTreeNode left = new BTreeNode((int) Math.random() * 10000 + "");
+                        now.left = left;
+                        queue.add(left);
+                    }
+                    if (k == 1 && flag == 1) {
+                        BTreeNode right = new BTreeNode((int) Math.random() * 10000 + "");
+                        now.right = right;
+                        queue.add(right);
+                    }
+                }
+            }
+        }
         return a;
     }
 }
