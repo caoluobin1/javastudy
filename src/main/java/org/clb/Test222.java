@@ -1,12 +1,8 @@
 package org.clb;
 
 
-
-import org.apache.lucene.util.fst.Builder;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Map;
 
 /**
  * @Description
@@ -33,7 +29,9 @@ public class Test222 {
 //        for (Object o : list) {
 //            System.out.println(o);
 //        }
-        System.out.println("33072419971212");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Math.random());
+        }
     }
     //        String year = datetime.substring(0,4);
     //        String month = datetime.substring(0,7);

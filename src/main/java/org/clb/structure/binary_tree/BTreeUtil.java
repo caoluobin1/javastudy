@@ -26,6 +26,23 @@ public class BTreeUtil {
         c.setLeft(f);c.setRight(g);
         return a;
     }
+
+    public static BTreeNode getBTreeNode1_10() {
+        BTreeNode a = new BTreeNode("5");
+        BTreeNode b = new BTreeNode("3");
+        BTreeNode c = new BTreeNode("7");
+        BTreeNode d = new BTreeNode("1");
+        BTreeNode e = new BTreeNode("4");
+        BTreeNode f = new BTreeNode("6");
+        BTreeNode g = new BTreeNode("9");
+        a.setLeft(b);
+        a.setRight(c);
+        b.setLeft(d);
+        b.setRight(e);
+        c.setLeft(f);
+        c.setRight(g);
+        return a;
+    }
     public static BTreeNode getNotCompleteBTreeNode(){
         BTreeNode a=new BTreeNode("a");
         BTreeNode b=new BTreeNode("b");

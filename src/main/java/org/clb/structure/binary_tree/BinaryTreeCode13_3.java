@@ -44,7 +44,13 @@ public class BinaryTreeCode13_3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(isBST(BTreeUtil.generateBTree()));
+        for (int i = 0; i < 10000; i++) {
+            if (isBST(BTreeUtil.generateBTree())) {
+                System.out.println(true);
+            }
+        }
+        System.out.println(isBST(BTreeUtil.getBTreeNode1_10()));
+
     }
 
     /**
