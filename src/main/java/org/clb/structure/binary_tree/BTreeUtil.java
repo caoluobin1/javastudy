@@ -34,13 +34,13 @@ public class BTreeUtil {
         BTreeNode d = new BTreeNode("1");
         BTreeNode e = new BTreeNode("4");
         BTreeNode f = new BTreeNode("6");
-        BTreeNode g = new BTreeNode("9");
+//        BTreeNode g = new BTreeNode("9");
         a.setLeft(b);
         a.setRight(c);
         b.setLeft(d);
         b.setRight(e);
         c.setLeft(f);
-        c.setRight(g);
+//        c.setRight(g);
         return a;
     }
     public static BTreeNode getNotCompleteBTreeNode(){
@@ -59,7 +59,7 @@ public class BTreeUtil {
 
     public static BTreeNode generateBTree() {
         BTreeNode a = new BTreeNode("1");
-        int count = (int) Math.random() * 2 + 1;
+        int count = (int) (Math.random() * 10) + 1;
         Queue<BTreeNode> queue = new LinkedList<>();
         queue.add(a);
         for (int i = 0; i < count; i++) {
@@ -69,12 +69,12 @@ public class BTreeUtil {
                 for (int k = 0; k < 2; k++) {
                     int flag = (int) Math.random() * 2 + 1;
                     if (k == 0 && flag == 1) {
-                        BTreeNode left = new BTreeNode((int) Math.random() * 10000 + "");
+                        BTreeNode left = new BTreeNode((int) (Math.random()) * 10000 + "");
                         now.left = left;
                         queue.add(left);
                     }
                     if (k == 1 && flag == 1) {
-                        BTreeNode right = new BTreeNode((int) Math.random() * 10000 + "");
+                        BTreeNode right = new BTreeNode((int) (Math.random() * 10000) + "");
                         now.right = right;
                         queue.add(right);
                     }

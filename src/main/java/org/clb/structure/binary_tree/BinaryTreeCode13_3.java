@@ -22,8 +22,8 @@ public class BinaryTreeCode13_3 {
         Info left = process(x.left);
         Info right = process(x.right);
         boolean isBST = true;
-        int max = 0;
-        int min = 0;
+        int max = Integer.parseInt(x.value);
+        int min = Integer.parseInt(x.value);
         if (left != null && !left.isBST) {
             isBST = left.isBST;
             max = Math.max(left.max, Integer.parseInt(x.value));
@@ -44,11 +44,15 @@ public class BinaryTreeCode13_3 {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 10000; i++) {
+        int count = 0;
+        for (int i = 0; i < 1000; i++) {
             if (isBST(BTreeUtil.generateBTree())) {
                 System.out.println(true);
+                System.out.println(i);
+                count++;
             }
         }
+        System.out.println(count);
         System.out.println(isBST(BTreeUtil.getBTreeNode1_10()));
 
     }
