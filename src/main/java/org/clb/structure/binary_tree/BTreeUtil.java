@@ -34,13 +34,8 @@ public class BTreeUtil {
         BTreeNode d = new BTreeNode("1");
         BTreeNode e = new BTreeNode("4");
         BTreeNode f = new BTreeNode("6");
-//        BTreeNode g = new BTreeNode("9");
+        BTreeNode g = new BTreeNode("9");
         a.setLeft(b);
-        a.setRight(c);
-        b.setLeft(d);
-        b.setRight(e);
-        c.setLeft(f);
-//        c.setRight(g);
         return a;
     }
     public static BTreeNode getNotCompleteBTreeNode(){
