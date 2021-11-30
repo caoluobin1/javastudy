@@ -65,7 +65,7 @@ public class BTreeUtil {
             for (int j = 0; j < size; j++) {
                 BTreeNode now = queue.poll();
                 for (int k = 0; k < 2; k++) {
-                    int flag = (int) Math.random() * 2 + 1;
+                    int flag = (int) (Math.random() * 2) + 1;
                     if (k == 0 && flag == 1) {
                         BTreeNode left = new BTreeNode((int) (Math.random() * 10000) + "");
                         now.left = left;
