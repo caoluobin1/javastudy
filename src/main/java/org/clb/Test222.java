@@ -13,25 +13,47 @@ import java.util.Map;
 public class Test222 {
 
     public static void main(String[] args) throws ParseException {
+        String a = "man_cz_nurse_num VARCHAR(32) default 0 comment '男性持证护理员' ;" +
+                "man_cz_nurse_num_yes VARCHAR(32) default 0 comment '男性持证护理员' ;" +
+                "woman_cz_nurse_num VARCHAR(32) default 0 comment '女性持证护理员' ;" +
+                "woman_cz_nurse_num_yes VARCHAR(32) default 0 comment '女性持证护理员' ;" +
+                "cz_cz_nurse_num VARCHAR(32) default 0 comment '初中持证护理员数' ;" +
+                "cz_cz_nurse_num_yes VARCHAR(32) default 0 comment '初中持证护理员数' ;" +
+                "gz_cz_nurse_num VARCHAR(32) default 0 comment '高中持证护理员数' ;" +
+                "gz_cz_nurse_num_yes VARCHAR(32) default 0 comment '高中持证护理员数' ;" +
+                "zz_cz_nurse_num VARCHAR(32) default 0 comment '中职/中专持证护理员' ;" +
+                "zz_cz_nurse_num_yes VARCHAR(32) default 0 comment '中职/中专持证护理员' ;" +
+                "dz_cz_nurse_num VARCHAR(32) default 0 comment '大专持证护理员数' ;" +
+                "dz_cz_nurse_num_yes VARCHAR(32) default 0 comment '大专持证护理员数' ;" +
+                "bk_cz_nurse_num VARCHAR(32) default 0 comment '本科持证护理员数' ;" +
+                "bk_cz_nurse_num_yes VARCHAR(32) default 0 comment '本科持证护理员数' ;" +
+                "yjs_cz_nurse_num VARCHAR(32) default 0 comment '研究生持证护理员数' ;" +
+                "yjs_cz_nurse_num_yes VARCHAR(32) default 0 comment '研究生持证护理员数' ;" +
+                "less_thirty_cz_nurse_num VARCHAR(32) default 0 comment '30以下持证护理员数' ;" +
+                "less_thirty_cz_nurse_num_yes VARCHAR(32) default 0 comment '30以下持证护理员数' ;" +
+                "thirty_cz_nurse_num VARCHAR(32) default 0 comment '30-39以下持证护理员数' ;" +
+                "thirty_cz_nurse_num_yes VARCHAR(32) default 0 comment '30-39以下持证护理员数' ;" +
+                "forty_cz_nurse_num VARCHAR(32) default 0 comment '40-49以下持证护理员数' ;" +
+                "forty_cz_nurse_num_yes VARCHAR(32) default 0 comment '40-49以下持证护理员数' ;" +
+                "more_fifty_cz_nurse_num VARCHAR(32) default 0 comment '50以上持证护理员数' ;" +
+                "more_fifty_cz_nurse_num_yes VARCHAR(32) default 0 comment '50以上持证护理员数' ;";
+        String[] split = a.split(" VARCHAR");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < split.length; i++) {
+            if (i == 0) {
+                result.append(split[i] + ",");
+            } else if (i < split.length - 1) {
 
-        System.out.println("MA288YL7533068319D4002".length());
-        System.out.println("?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?".split(",").length);
-        //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = format.parse("2021-08-09");
-//        Date date2 = format.parse("2021-08-02");
-//        System.out.println(date.compareTo(date2));
-//        List list=new LinkedList();
-//        list.add("1");
-//        list.add("2");
-//        list.add("3");
-//        list.add("4");
-//        list.add(4,"5");
-//        for (Object o : list) {
-//            System.out.println(o);
-//        }
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Math.random());
+                result.append(split[i].split(";")[1] + ",");
+            }
+
         }
+        System.out.println(result.toString());
+        String[] split1 = result.toString().split(",");
+        for (int i = 0; i < split1.length; i++) {
+            System.out.print(split1[i] + "=?,");
+        }
+
     }
     //        String year = datetime.substring(0,4);
     //        String month = datetime.substring(0,7);

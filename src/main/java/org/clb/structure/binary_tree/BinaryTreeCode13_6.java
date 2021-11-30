@@ -11,22 +11,54 @@ import org.clb.pojo.list.BTreeNode;
  * @Author clb
  */
 public class BinaryTreeCode13_6 {
-    public static int isFull(BTreeNode head) {
-        return 1;
+    public static int getBstCount(BTreeNode head) {
+        return process(head).count;
     }
 
     public static Info process(BTreeNode x) {
         if (x == null) return null;
         Info left = process(x.left);
         Info right = process(x.right);
-        boolean isBST = false;
+        boolean isBST = true;
+        int max = Integer.parseInt(x.value);
+        int min = Integer.parseInt(x.value);
+        int count = 0;
+        if (left != null) {
+            isBST = left.isBST && Integer.parseInt(x.value) > left.max;
+            max = Math.max(max, left.max);
+            min = Math.max(min, left.min);
+            count += left.count;
+        }
+        if (right != null) {
+            isBST = right.isBST && Integer.parseInt(x.value) < right.min;
+            max = Math.max(max, right.max);
+            min = Math.max(min, right.min);
+            count += right.count;
+        }
+        if (isBST) count++;
 
-        return null;
+        return new Info(isBST, max, min, count);
     }
 
     public static void main(String[] args) {
-        System.out.println(isFull(BTreeUtil.getBTreeNode1_10()));
+        int count = 0;
+        for (int i = 0; i < 1000; i++) {
+            BTreeNode x = BTreeUtil.generateBTree();
+            if (getBstCount(x) != getCount(x)) {
+                count++;
+            }
+        }
 
+
+    }
+
+    public static int getCount(BTreeNode x) {
+        if (x == null) return 0;
+        int left = getCount(x.left);
+        int right = getCount(x.right);
+        boolean bst = BinaryTreeCode13_3.isBST(x);
+        int a = bst ? 1 : 0;
+        return left + right + a;
     }
 
     @Data

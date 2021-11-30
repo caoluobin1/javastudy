@@ -6,6 +6,16 @@ public class User {
     String b = "asd";
     Integer age;
 
+    public User(String id, String name, String b, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.b = b;
+        this.age = age;
+    }
+
+    public User() {
+    }
+
     public String getId() {
         return id;
     }
@@ -38,19 +48,9 @@ public class User {
         this.age = age;
     }
 
-    public User(String id, String name, String b, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.b = b;
-        this.age = age;
+    @Override
+    public String toString() {
+        return "User{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", b='" + b + '\''
+                + ", age=" + age + '}';
     }
-
-    public User() {
-    }
-
-//    @Override
-//    public String toString() {
-//        return "User{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", b='" + b + '\''
-//            + ", age=" + age + '}';
-//    }
 }
