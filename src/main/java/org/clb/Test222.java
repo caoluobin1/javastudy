@@ -13,8 +13,9 @@ import java.util.Map;
 public class Test222 {
 
     public static void main(String[] args) throws ParseException {
-        for (int i = 0; i < 100; i++) {
-            System.out.println((int) (Math.random() * 2) + 1);
+        String[] split = "".split(",");
+        for (String s : split) {
+            System.out.println("a");
         }
     }
     //        String year = datetime.substring(0,4);

@@ -30,7 +30,7 @@ public class BinaryTreeCode13_6 {
             count += left.count;
         }
         if (right != null) {
-            isBST = right.isBST && Integer.parseInt(x.value) < right.min;
+            isBST = right.isBST && Integer.parseInt(x.value) < right.min && isBST;
             max = Math.max(max, right.max);
             min = Math.max(min, right.min);
             count += right.count;
