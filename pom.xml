@@ -35,7 +35,7 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
+             </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -81,6 +81,13 @@
             <artifactId>javase</artifactId>
             <version>3.3.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.10</version>
+        </dependency>
+
 
 
     </dependencies>
