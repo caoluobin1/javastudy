@@ -9,7 +9,7 @@ public class ThreadInterupptTest {
 //                e.printStackTrace();
 //            }
             long l = System.currentTimeMillis();
-            while (System.currentTimeMillis()-l<10000){
+            while (System.currentTimeMillis()-l<1){
 
             }
             System.out.println("第一次");
@@ -23,8 +23,11 @@ public class ThreadInterupptTest {
         thread.interrupted();//清除标记位 使标记位为false
         thread.isInterrupted();//查看标记位
         //System.out.println(thread.interrupted());
+        for (int i = 0; i < 1000; i++) {
 
-        System.out.println(thread.isInterrupted());
+            System.out.println(thread.isAlive()+"=="+thread.isInterrupted());
+        }
+
 //        Thread.sleep(1000*1);
 //        System.out.println("====");
 //        thread.interrupt();

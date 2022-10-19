@@ -1,7 +1,10 @@
 package org.clb;
 
 
+import com.alibaba.fastjson.JSON;
+
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,10 +16,11 @@ import java.util.Map;
 public class Test222 {
 
     public static void main(String[] args) throws ParseException {
-        String[] split = "".split(",");
-        for (String s : split) {
-            System.out.println("a");
-        }
+        Map<String,String> map = new HashMap<>();
+        map.put("name","123");
+        System.out.println(JSON.toJSONString(map));
+
+
     }
     //        String year = datetime.substring(0,4);
     //        String month = datetime.substring(0,7);
