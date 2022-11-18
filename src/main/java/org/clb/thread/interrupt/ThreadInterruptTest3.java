@@ -25,7 +25,7 @@ public class ThreadInterruptTest3 {
         }
         System.out.println("mainThreadLock");
 //        lock.lock();
-        thread.interrupt();
-//        LockSupport.unpark(thread);
+//        thread.interrupt();
+        LockSupport.unpark(thread);
     }
 }

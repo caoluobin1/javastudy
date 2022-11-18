@@ -2,10 +2,12 @@ package org.clb;
 
 
 import com.alibaba.fastjson.JSON;
+import org.clb.pojo.User;
 
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * @Description
@@ -16,11 +18,32 @@ import java.util.Map;
 public class Test222 {
 
     public static void main(String[] args) throws ParseException {
-        Map<String,String> map = new HashMap<>();
-        map.put("name","123");
-        System.out.println(JSON.toJSONString(map));
+        Map map = new HashMap();
+        map.put(null,"a");
+        System.out.println(map.get(null));
+//        String no = "005";
+//        System.out.println(String.format("%02d", 12));
+//        System.out.println(Pattern.matches("\\d{4}", "005"));
+//        System.out.println(-111>>>2);
+//        System.out.println(Pattern.matches("\\d+.\\d+", "1111.55555"));
 
-
+//        User user=new User();
+//        user.setName("aa");
+//        deal(user);
+//        System.out.println(user.getName());
+//        System.out.println(Thread.currentThread().isDaemon());
+//        new Thread(()->{
+//            try {
+//                System.out.println(Thread.currentThread().isDaemon());
+//                Thread.sleep(5000);
+//                System.out.println("˯");
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }).start();
+    }
+    public static void deal(User user){
+        user.setName("bb");
     }
     //        String year = datetime.substring(0,4);
     //        String month = datetime.substring(0,7);
