@@ -16,9 +16,9 @@ import java.util.regex.Pattern;
  * @Author clb
  */
 public class Test222 {
-
+    private static final Map map = new HashMap();
+    private static final Integer b = 2;
     public static void main(String[] args) throws ParseException {
-        Map map = new HashMap();
         map.put(null,"a");
         System.out.println(map.get(null));
 //        String no = "005";
