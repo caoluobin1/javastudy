@@ -9,22 +9,22 @@ public class ReentrantLockTest {
     private static final Condition condition =lock.newCondition();
     private static Integer a = 0;
     public static void main(String[] args) throws InterruptedException {
-        fairTest1();
+        fairTest2();
     }
 
     /**测试公平锁当队列中有线程等待时需要需要进入队列等待*/
     public static void fairTest1() throws InterruptedException {
         ReentrantLock fairLock = new ReentrantLock(true);
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i < 40; i++) {
             //睡10ms保证前面是按序
-            if (i<=10)
+            if (i<=20)
                 Thread.sleep(10);
             int finalI = i;
             new Thread(()->{
                 try {
                     fairLock.lock();
                     if (finalI==1){
-                        while (fairLock.getQueueLength()<=10){//保证有至少10个数据是在队列中等待的
+                        while (fairLock.getQueueLength()<=20){//保证有至少10个数据是在队列中等待的
                         }
                     }
                     System.out.println(Thread.currentThread().getName()+"执行,等待数量"+fairLock.getQueueLength());
@@ -37,7 +37,7 @@ public class ReentrantLockTest {
     /**测试非公平锁当队列中的数据会按序执行*/
     public static void fairTest2() throws InterruptedException {
         ReentrantLock fairLock = new ReentrantLock();
-        for (int i = 1; i < 41; i++) {
+        for (int i = 1; i < 21; i++) {
             //睡10ms保证按序进入队列
             Thread.sleep(10);
             int finalI = i;
@@ -45,7 +45,7 @@ public class ReentrantLockTest {
                 try {
                     fairLock.lock();
                     if (finalI==1){
-                        while (fairLock.getQueueLength()<=37){//保证有至少10个数据是在队列中等待的
+                        while (fairLock.getQueueLength()<19){//保证另外19个线程都在队列中等待
                         }
                     }
                     System.out.println(Thread.currentThread().getName()+"执行,等待数量"+fairLock.getQueueLength());
@@ -58,16 +58,16 @@ public class ReentrantLockTest {
     /**测试非公平锁当队列中有数据时后续新进入的线程可以和头结点进行竞争*/
     public static void fairTest3() throws InterruptedException {
         ReentrantLock fairLock = new ReentrantLock();
-        for (int i = 1; i < 20; i++) {
+        for (int i = 1; i < 40; i++) {
             //睡10ms保证前面是按序
             if (i<=10)
-                Thread.sleep(10);
+                Thread.sleep(20);
             int finalI = i;
             new Thread(()->{
                 try {
                     fairLock.lock();
                     if (finalI==1){
-                        while (fairLock.getQueueLength()<=10){//保证有至少10个数据是在队列中等待的
+                        while (fairLock.getQueueLength()<=20){//保证有至少10个数据是在队列中等待的
                         }
                     }
                     System.out.println(Thread.currentThread().getName()+"执行,等待数量"+fairLock.getQueueLength());
