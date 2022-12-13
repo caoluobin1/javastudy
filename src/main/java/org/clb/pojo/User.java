@@ -15,7 +15,9 @@ public class User {
 
     public User() {
     }
-
+    public static User getDefaultUser(){
+        return new User("1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","ÕÅÈýaaaaaaaaaaaaaaaaaaaaaa","ccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",10);
+    }
     public String getId() {
         return id;
     }

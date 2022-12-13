@@ -9,7 +9,25 @@ public class CompletableFutureTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 //        whenCompleteTest();
 //        thenApplyTest();
-        thenComposeTest();
+//        thenComposeTest();
+//        System.out.println(advanceProbe(1));
+//        System.out.println(10>>1);
+//        System.out.println(10>>>1);
+//        System.out.println(-10>>1);
+//        System.out.println(-10>>>1);
+        System.out.println(0x61c88647);
+        Thread thread = new Thread();
+
+    }
+    static final int advanceProbe(int probe) {
+        probe ^= probe << 13;   // 0000000000001   100000000001
+        probe ^= probe >>> 17; //100000000001
+        probe ^= probe << 5;
+        return probe;
+    }
+
+    public void test(Thread thread) {
+
     }
 
 
