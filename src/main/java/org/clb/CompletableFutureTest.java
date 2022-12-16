@@ -42,7 +42,7 @@ public class CompletableFutureTest {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            return "aaaa";
+            return "";
         });
         System.out.println(g.join());//阻塞获取结果  不需要处理异常
         System.out.println(g.get());//阻塞获取结果   需要处理ExecutionException, InterruptedException异常

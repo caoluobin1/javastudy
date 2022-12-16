@@ -3,9 +3,12 @@ package org.clb.thread.thread_pool;
 import lombok.Data;
 import lombok.SneakyThrows;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.*;
 
 public class MyThreadPool extends ThreadPoolExecutor {
+
+    public static ThreadLocal<String> tokenThreadLocal = new ThreadLocal<>();
     public MyThreadPool(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     }
@@ -15,40 +18,43 @@ public class MyThreadPool extends ThreadPoolExecutor {
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
         System.out.println("before");
-        if (r instanceof FutureTask) {
-            FutureTask futureTask =(FutureTask)r;
-        }
-    }
-
-    @Data
-    abstract static class TokenRunnable implements Runnable{
-        private String token;
-
-        public TokenRunnable(String token) {
-            this.token = token;
-        }
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        MyThreadPool threadPool = new MyThreadPool(1, 2,
-                0L, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<>(5));
-        threadPool.submit(new TokenRunnable("5555") {
-            @SneakyThrows
-            @Override
-            public void run() {
-                System.out.println("开始执行1");
-                TimeUnit.SECONDS.sleep(5);
-                System.out.println("开始执行2");
-                int c = 1/0;
-                System.out.println("开始执行3");
+        if (r instanceof MyFutureTask) {
+            MyFutureTask futureTask = (MyFutureTask) r;
+            String token = futureTask.getToken();
+            System.out.println("获取token"+token);
+            tokenThreadLocal.set(token);
+        }else {
+            try {
+                Field fn = r.getClass().getDeclaredField("fn");
+                fn.setAccessible(true);
+                if (fn!=null){
+                    Object task = fn.get(r);
+                    if (task instanceof MySupplierTask){
+                        MySupplierTask futureTask = (MySupplierTask)task ;
+                        String token = futureTask.getToken();
+                        System.out.println("获取token"+token);
+                        tokenThreadLocal.set(token);
+                    }
+                }
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
-        });
-        threadPool.shutdown();
-        while (!threadPool.isTerminated()){
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("旋转跳跃");
+
         }
-        System.out.println(1/0);
     }
+
+    @Override
+    protected void afterExecute(Runnable r, Throwable t) {
+        super.afterExecute(r, t);
+        tokenThreadLocal.remove();
+    }
+
+    public <T> Future<T> submit(MyFutureTask task) {
+        if (task == null) throw new NullPointerException();
+        execute(task);
+        return task;
+    }
+
 }
