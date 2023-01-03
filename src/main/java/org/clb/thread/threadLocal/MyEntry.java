@@ -55,6 +55,7 @@ public class MyEntry extends WeakReference<ThreadLocal<?>> {
 //                System.out.println(threadLocal);
                 break;
             }
+            //通过一直add触发gc
             list.add(User.getDefaultUser());
             System.out.println(a++);
         }

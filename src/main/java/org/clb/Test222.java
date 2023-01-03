@@ -19,8 +19,11 @@ public class Test222 {
     private static final Map map = new HashMap();
     private static final Integer b = 2;
     public static void main(String[] args) throws ParseException {
-        map.put(null,"a");
-        System.out.println(map.get(null));
+
+        String a="12345";
+        a=a.length()>5?a.substring(0,5):a;
+        System.out.println(a);
+        ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(()->1);
 //        String no = "005";
 //        System.out.println(String.format("%02d", 12));
 //        System.out.println(Pattern.matches("\\d{4}", "005"));
