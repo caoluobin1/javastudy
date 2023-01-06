@@ -1,18 +1,41 @@
 package org.clb.aqs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.stream.Collectors;
 
 public class ReadWriteLockTest {
+    public static final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+    public static final ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
+    public static final ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
+    public static Integer count = 0;
+
+    public static Integer getCount() {
+        try {
+            readLock.lock();
+            return count;
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public static void countAdd() {
+        try {
+            writeLock.lock();
+            count++;
+        } finally {
+            writeLock.unlock();
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException {
-        test2();
+        test4();
+
     }
 
     public static void test1() {
-        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-        ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-        ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
         new Thread(()->{
             try {
                 System.out.println("获取写锁");
@@ -47,9 +70,6 @@ public class ReadWriteLockTest {
     }
 
     public static void test2() throws InterruptedException {
-        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-        ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-        ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
         for (int i = 0; i < 10; i++) {
             new Thread(()->{
                 try {
@@ -96,5 +116,60 @@ public class ReadWriteLockTest {
                 }
             },"thread"+i).start();
         }
+    }
+
+    public static void test3() throws InterruptedException {
+        //先有读锁 同一线程也不能被写锁重入
+
+        new Thread(()->{
+            String name = Thread.currentThread().getName();
+            try {
+                readLock.lock();
+                System.out.println(name+"加读锁");
+                writeLock.lock();
+                System.out.println(name+"加写锁");
+                TimeUnit.SECONDS.sleep(4);
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                readLock.unlock();
+                System.out.println(name+"释放读锁");
+                writeLock.unlock();
+                System.out.println(name+"释放写锁");
+            }
+        },"线程1").start();
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(()->{
+            String name = Thread.currentThread().getName();
+            try {
+                readLock.lock();
+                System.out.println(name+"加读锁");
+                TimeUnit.SECONDS.sleep(1);
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                readLock.unlock();
+                System.out.println(name+"释放读锁");
+            }
+        }).start();
+    }
+
+
+    public static void test4() throws InterruptedException {
+        for (int i = 0; i < 1000; i++) {
+            new Thread(()->{
+                ReadWriteLockTest.countAdd();
+            }).start();
+        }
+        for (int i = 0; i < 10000; i++) {
+            new Thread(()->{
+                ReadWriteLockTest.getCount();
+            }).start();
+        }
+
+        TimeUnit.SECONDS.sleep(5);
+        System.out.println(ReadWriteLockTest.getCount());
     }
 }
