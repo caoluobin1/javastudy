@@ -3,26 +3,21 @@ package org.clb.juc.thread.threadLocal;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadLocalTest {
-    private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(()->10);
 
     public static void main(String[] args) throws InterruptedException {
-        new Thread(()->{
-            threadLocal.set(10);
-            System.gc();
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println(threadLocal.get());
-        }).start();
-        TimeUnit.SECONDS.sleep(5);
+
     }
 
+    /**
+     * threadLocal set完需要及时remove  防止内存泄漏
+     */
     public static void test1() {
-        System.out.println(0x61c88647*1);
-        System.out.println(0x61c88647*2);
-        System.out.println(0x61c88647*3);
+        threadLocal.set(10);
+        try {
 
+        } finally {
+            threadLocal.remove();
+        }
     }
 }
