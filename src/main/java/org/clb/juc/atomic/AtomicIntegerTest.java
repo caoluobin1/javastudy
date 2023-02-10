@@ -8,7 +8,15 @@ public class AtomicIntegerTest {
             new AtomicInteger();
 
     public static void main(String[] args) {
-        System.out.println(nextHashCode.getAndAdd(0x61c88647)&31);
+        test1();
+    }
+
+    public static void test1() {
+        int increment = nextHashCode.getAndIncrement();
+        System.out.println(increment);
+        increment = nextHashCode.getAndIncrement();
+        System.out.println(increment);
+        System.out.println(nextHashCode.get());
     }
 
 

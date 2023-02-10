@@ -11,26 +11,35 @@ import java.util.concurrent.TimeUnit;
  * @Author clb
  */
 public class ScheduledThreadPoolTest {
+    public static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(
+            3);
     public static void main(String[] args) {
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(
-            1);
-//        executor.schedule(()->{
-//            try {
-//                Thread.sleep(1000);
-//                System.out.println(new Date());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        },1, TimeUnit.SECONDS);
+        scheduleWithFixedDelayTest();
+    }
+    public static void scheduleTest() {
+                executor.schedule(()->{
+            try {
+                Thread.sleep(1000);
+                System.out.println(new Date());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },1, TimeUnit.SECONDS);
+    }
+
+    public static void scheduleAtFixedRateTest() {
         //固定时间间隔执行
-//        executor.scheduleAtFixedRate(()->{
-//            try {
-//                Thread.sleep(1000);
-//                System.out.println(new Date());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        },0,2, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(()->{
+            try {
+                Thread.sleep(1000);
+                System.out.println(new Date());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        },0,2, TimeUnit.SECONDS);
+    }
+
+    public static void scheduleWithFixedDelayTest() {
         //一个任务执行完后延迟delay时间执行
         executor.scheduleWithFixedDelay(()->{
             try {

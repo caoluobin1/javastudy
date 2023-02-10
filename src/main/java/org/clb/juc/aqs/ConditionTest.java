@@ -1,16 +1,47 @@
 package org.clb.juc.aqs;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ConditionTest {
 
+    private static ReentrantLock lock = new ReentrantLock();
+    private static Condition condition = lock.newCondition();
 
-    public static void main(String[] args) {
-        String a= "123456";
-        System.out.println(a.substring(0,2));
-        System.out.println(a.substring(2,a.length()));
+    public static void main(String[] args) throws InterruptedException {
+        test();
     }
 
-    public static void set(Map map){
+    public static void test() throws InterruptedException {
+
+        new Thread(() -> {
+            try {
+                lock.lock();
+                System.out.println(Thread.currentThread().getName()+"µÈ´ý1");
+                condition.await();
+                System.out.println(Thread.currentThread().getName()+"µÈ´ý2");
+                condition.await();
+                System.out.println(Thread.currentThread().getName()+"³å");
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                lock.unlock();
+            }
+        },"ThreadB").start();
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(() -> {
+            try {
+                lock.lock();
+                System.out.println(Thread.currentThread().getName()+"111");
+                condition.signal();
+                System.out.println(Thread.currentThread().getName()+"222");
+                condition.signal();
+                System.out.println(Thread.currentThread().getName()+"333");
+            } finally {
+                lock.unlock();
+            }
+        },"ThreadA").start();
     }
 }

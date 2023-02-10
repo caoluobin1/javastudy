@@ -11,6 +11,9 @@ public class Fa implements Acc<List>{
     private BigDecimal usedAmount;
     @Override
     public void say(List a) {
+        a.forEach(c->{
+            System.out.println(c);
+        });
     }
 
     @Override

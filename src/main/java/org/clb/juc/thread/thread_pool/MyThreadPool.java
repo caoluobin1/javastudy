@@ -10,11 +10,16 @@ public class MyThreadPool extends ThreadPoolExecutor {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     }
 
+    public static MyThreadPool getInstance() {
+        return   new MyThreadPool(4, 10,
+                0L, TimeUnit.MILLISECONDS,
+                new ArrayBlockingQueue<>(10));
+    }
 
     @Override
     protected void beforeExecute(Thread t, Runnable r) {
         super.beforeExecute(t, r);
-        System.out.println("before");
+        System.out.println("before  poolSize"+super.getPoolSize());
         if (r instanceof MyFutureTask) {
             MyFutureTask futureTask = (MyFutureTask) r;
             String token = futureTask.getToken();
@@ -51,6 +56,8 @@ public class MyThreadPool extends ThreadPoolExecutor {
     protected void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
         tokenThreadLocal.remove();
+        System.out.println("after  poolSize"+super.getPoolSize());
+        System.out.println("after 已完成任务==>"+super.getCompletedTaskCount());
     }
 
     public <T> Future<T> submit(MyFutureTask task) {
