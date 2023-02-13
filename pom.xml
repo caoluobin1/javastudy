@@ -35,11 +35,11 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-             </plugin>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.google.guava/guava &ndash;&gt;-->
+        <!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.google.guava/guava &ndash;&gt;-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -98,6 +98,12 @@
             <groupId>com.xkcoding.http</groupId>
             <artifactId>simple-http</artifactId>
             <version>1.0.2</version>
+        </dependency>
+        <!--主要分析对象jvm中的内存描述和分布布局-->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
         </dependency>
     </dependencies>
 
