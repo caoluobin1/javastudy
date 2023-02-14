@@ -37,6 +37,7 @@ public class Test222 extends Thread{
     private static final Map map3 = new Hashtable();
     private static final Integer b = 2;
     public static void main(String[] args) throws Exception {
+        System.out.println(Test222.class.toString());
 //        Test222 test222 = new Test222(new Runnable() {
 //            @Override
 //            public void run() {
