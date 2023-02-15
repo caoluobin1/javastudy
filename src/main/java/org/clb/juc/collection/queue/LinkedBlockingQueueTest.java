@@ -1,4 +1,4 @@
-package org.clb.juc.collection;
+package org.clb.juc.collection.queue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
