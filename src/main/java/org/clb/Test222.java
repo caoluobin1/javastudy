@@ -3,16 +3,14 @@ package org.clb;
 
 import com.alibaba.fastjson.JSON;
 import org.clb.pojo.User;
+import org.clb.pojo.list.Node;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 import java.util.regex.Pattern;
 
 /**
@@ -22,6 +20,26 @@ import java.util.regex.Pattern;
  * @Author clb
  */
 public class Test222 extends Thread{
+
+
+    class Node {
+        String value;
+        Map<String,Node> map = new HashMap<>();
+    }
+
+    public void nodeTest() {
+        String[] subs = {"1","101","10101","10102","2","202","201","20101"};
+        String[] target = {"10101","202"};
+
+        for (String value : target) {
+
+            for (int i = 0; i < value.length(); i++) {
+                String a = value.substring(i, i + 1);
+                Node node = new Node();
+            }
+        }
+
+    }
     @Override
     public void run() {
         super.run();
@@ -37,7 +55,21 @@ public class Test222 extends Thread{
     private static final Map map3 = new Hashtable();
     private static final Integer b = 2;
     public static void main(String[] args) throws Exception {
-        System.out.println(Test222.class.toString());
+        System.out.println(Thread.currentThread().isDaemon());
+        System.out.println(Thread.currentThread().isDaemon());
+        try {
+            new Thread(() ->{
+                try {
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                int i=1/0;
+            }).start();
+        } catch (Exception e) {
+            System.out.println("gggg");
+            throw new RuntimeException(e);
+        }
 //        Test222 test222 = new Test222(new Runnable() {
 //            @Override
 //            public void run() {

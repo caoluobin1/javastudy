@@ -1,6 +1,8 @@
 package org.clb.juc.thread.thread_pool;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class MyThreadPool extends ThreadPoolExecutor {
@@ -56,6 +58,7 @@ public class MyThreadPool extends ThreadPoolExecutor {
     protected void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
         tokenThreadLocal.remove();
+//        r.run();
         System.out.println("after  poolSize"+super.getPoolSize());
         System.out.println("after 已完成任务==>"+super.getCompletedTaskCount());
     }
@@ -70,7 +73,25 @@ public class MyThreadPool extends ThreadPoolExecutor {
         String token ="eyJhbGciOiJIUzUxMiJ9.eyJ0eXBlIjoxLCJleHAiOjE2NzM1NzY4NzksInVzZXJJZCI6NzMxODY5MTA1MzEyOTYwNTEyLCJhY2NvdW50TmFtZSI6ImNhb2x1b2JpbiIsImlhdCI6MTY3MDk4NDg3OSwib3JnSWQiOjYzOTUzNjczMTQ1MTExNzU3MX0.Dz8CjHPagg1X44Ie-4NyEdVUzcyVGjU6JOwmcb8wMKMsXI0oOKtjKLxCj39Gor5NItBrA6Y1w6P6izLDpT6JFA";
         MyThreadPool threadPool = new MyThreadPool(2, 4,
                 0L, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<>(5));
+                new LinkedTransferQueue<>());
+        List<String> list= new ArrayList<>();
+        list.add("acc");
+        list.add("add");
+        list.add("aee");
+        Callable callable =()->{
+            int a=1/0;
+            return 0;
+        };
+        Future future = threadPool.submit(callable);
+        try {
+            Object o = future.get();
+            System.out.println("result======================"+o);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
 //        Future<Object> future = threadPool.submit(new MyFutureTask(() -> {
 //            String threadToken = threadPool.tokenThreadLocal.get();
 //            System.out.println("threadToken==========================>" + threadToken);
@@ -78,12 +99,13 @@ public class MyThreadPool extends ThreadPoolExecutor {
 //            System.out.println("result==============================> " + economicSubListAllData.toString());
 //            return economicSubListAllData;
 //        }, token));
-        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(new MySupplierTask(token,() -> {
-            String threadToken = threadPool.tokenThreadLocal.get();
-            System.out.println("threadToken==========================>" + threadToken);
-            System.out.println("result==============================> ");
-            return 10;
-        }), threadPool);
+//        CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(new MySupplierTask(token,() -> {
+//            String threadToken = threadPool.tokenThreadLocal.get();
+//            System.out.println("threadToken==========================>" + threadToken);
+//            System.out.println("result==============================> ");
+//            return 10;
+//        }), threadPool);
+        threadPool.shutdown();
     }
 
 }
