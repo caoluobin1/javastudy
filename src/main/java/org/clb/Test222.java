@@ -22,6 +22,11 @@ import java.util.regex.Pattern;
 public class Test222 extends Thread{
 
 
+    // 1 1
+    // 1 2
+    // 2 3
+    // 3 5
+    // 5 8
     class Node {
         String value;
         Map<String,Node> map = new HashMap<>();

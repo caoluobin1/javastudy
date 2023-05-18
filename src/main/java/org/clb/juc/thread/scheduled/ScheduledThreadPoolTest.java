@@ -14,17 +14,19 @@ public class ScheduledThreadPoolTest {
     public static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(
             3);
     public static void main(String[] args) {
-        scheduleWithFixedDelayTest();
+        scheduleTest();
     }
     public static void scheduleTest() {
-                executor.schedule(()->{
+        executor.schedule(()->{
             try {
+                System.out.println(new Date());
                 Thread.sleep(1000);
                 System.out.println(new Date());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        },1, TimeUnit.SECONDS);
+        },3, TimeUnit.SECONDS);
+        executor.shutdown();
     }
 
     public static void scheduleAtFixedRateTest() {

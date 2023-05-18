@@ -7,13 +7,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @Data
-public class Son extends Fa{
+public class Son extends Fa {
     private BigDecimal budgetAmount;
     private ArrayList ab;
 
 
-
-    public void ay(){
+    public void ay() {
 
     }
 
