@@ -20,35 +20,98 @@ public class Code_1073 {
         int index = 1;
         List<Integer> list  = new LinkedList<>();
         int last = 0;
-        while (index<length) {
+        int llast = 0;
+        int lllast = 0;
+        while (index<=length) {
 
-            int a = index<length1?arr1[length1-index]:0;
-            int b = index<length2?arr2[length2-index]:0;
+            int a = index<=length1?arr1[length1-index]:0;
+            int b = index<=length2?arr2[length2-index]:0;
             int sum = a+b+last;
+            last=llast;
+            llast=lllast;
+            lllast=0;
             Integer res = 0;
             switch (sum) {
-                case 0:res=0;last=0;break;
-                case 1:res=1;last=0;break;
-                case 2:res=0;last=-1;break;
+                case -1:res=1;last+=-1;llast+=1;lllast=1;break;
+                case 0:res=0;last+=0;llast+=0;break;
+                case 1:res=1;last+=0;llast+=0;break;
+                case 2:res=0;last+=-1;llast+=0;break;
+                case 3: res =1;last+=-1;llast+=0;break;
                 default:
                     System.out.println("´íÎó");
             }
+            if (index==length && res==0&&last==0) break;
             list.add(res);
             index++;
         }
+        if (last==-1) {
+            list.add(1);
+            list.add(1);
+        }else if (last != 2 || llast != 1) {
+            if (llast != 0) {
+                list.add(last);
+                list.add(llast);
+            } else if (last != 0) {
+                list.add(last);
+            }
+        }
         Collections.reverse(list);
+        if (list.size()!=1) {
+            Iterator<Integer> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                Integer next = iterator.next();
+                if (next==0) {
+                    iterator.remove();
+                } else {
+                    break;
+                }
+            }
+        }
+        if (list.size()==0)  return new int[]{0};
         return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    public static int[] other(int[] arr1, int[] arr2) {
+        int i = arr1.length - 1, j = arr2.length - 1;
+        int carry = 0;
+        List<Integer> ans = new ArrayList<Integer>();
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int x = carry;
+            if (i >= 0) {
+                x += arr1[i];
+            }
+            if (j >= 0) {
+                x += arr2[j];
+            }
+            if (x >= 2) {
+                ans.add(x - 2);
+                carry = -1;
+            } else if (x >= 0) {
+                ans.add(x);
+                carry = 0;
+            } else {
+                ans.add(1);
+                carry = 1;
+            }
+            --i;
+            --j;
+        }
+        while (ans.size() > 1 && ans.get(ans.size() - 1) == 0) {
+            ans.remove(ans.size() - 1);
+        }
+        int[] arr = new int[ans.size()];
+        for (i = 0, j = ans.size() - 1; j >= 0; i++, j--) {
+            arr[i] = ans.get(j);
+        }
+        return arr;
+    }
 
     public static void main(String[] args) {
-        int[] ints = addNegabinary(new int[]{1, 1, 1, 1, 1}, new int[]{1, 0, 1});
-        //0 0 0 0 1
+        int[] ints = addNegabinary(new int[]{1,1,1}, new int[]{1,1,0});//[1,0,1,0]
         for (int anInt : ints) {
-            System.out.println(anInt);
-        }// 100 =  1 1 0 2 0
-        // 1 0 1   ||  1           0 -1 1 0  ||   -1  0   1 0 2 0
-        //    16 -8 4 -2 1
-        //     1  1 0  1 0
+            System.out.print(anInt+" ");
+        }
+        System.out.println();
+        //   -1 0   1 1 0
     }
 }
