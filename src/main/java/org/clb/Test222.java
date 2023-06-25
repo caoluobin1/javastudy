@@ -7,10 +7,9 @@ import org.clb.pojo.list.Node;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 /**
@@ -60,21 +59,18 @@ public class Test222 extends Thread{
     private static final Map map3 = new Hashtable();
     private static final Integer b = 2;
     public static void main(String[] args) throws Exception {
-        System.out.println(Thread.currentThread().isDaemon());
-        System.out.println(Thread.currentThread().isDaemon());
-        try {
-            new Thread(() ->{
-                try {
-                    TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                int i=1/0;
-            }).start();
-        } catch (Exception e) {
-            System.out.println("gggg");
-            throw new RuntimeException(e);
-        }
+
+        List<User> list =new ArrayList<>(5);
+        list.add(new User());
+        list.add(new User());
+        list.add(new User());
+        list.add(new User());
+        list.add(new User());
+        list.add(new User());
+        AtomicReference<Integer> index = new AtomicReference<>(1);
+        list.forEach(a->a.setAge(index.getAndSet(index.get() + 1)));
+        index.set(1);
+        list.forEach(System.out::println);
 //        Test222 test222 = new Test222(new Runnable() {
 //            @Override
 //            public void run() {
